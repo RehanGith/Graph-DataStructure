@@ -45,9 +45,42 @@ void Graph::give_edges() {
 	}
 }
 int main() {
-	Graph g1(7, 7);
-	g1.display();
-	g1.give_edges();
-	g1.display();
+	int n;
+	cout << "number of veritces: ";
+	cin >> n;
+	n = n + 1;
+	vector<vector<int>> matrix(n , vector<int>(n , 0));
+	cout << "Edges " << endl;
+	while (true)
+	{
+		int x, y;
+		cin >> x >> y;
+		if ((x < 0 or x >= n) && (y < 0 or y >= n))
+			continue;
+		matrix[x][y] = 1;
+		matrix[y][x] = 1;
+		char ch;
+		cout << "Is there any edge their: ";
+		cin >> ch;
+		if (ch == 'N' or ch == 'n')
+			break;
+	}
+	cout << "Matrix" << endl;
+	cout << "    ";
+	for (int i = 1; i < n ; i++) {
+		cout << i << " ";
+	}
+	cout << endl;
+	for (int i = 1; i < n ; i++)
+	{
+		cout << i << " [ ";
+		for (int j = 1; j < n ; j++)
+		{
+			cout << matrix[i][j] << " ";
+		}
+		cout << "]" << endl;
+	}
+	cout << "============================" << endl;
+	int *ad_list[]
 	return 0;
 }
