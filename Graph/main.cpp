@@ -1,7 +1,11 @@
 #include <iostream>
 #include <vector>
 using namespace std; 
-
+struct node {
+	int data;
+	node* next;
+	node(int d): data(d), next(nullptr) { }
+};
 class Graph {
 	vector<vector<int>> matrix;
 	int n;
@@ -44,6 +48,21 @@ void Graph::give_edges() {
 			break;
 	}
 }
+void create_node(node*& root, int key) {
+	node* cur{}, *pre{};
+	pre = cur = root;
+	if (root == nullptr) {
+		root = new node(key);
+	}
+	else {
+		while (cur) {
+			pre = cur;
+			cur = cur->next;
+		}
+		cur = new node(key);
+		pre->next = cur;
+	}
+}
 int main() {
 	int n;
 	cout << "number of veritces: ";
@@ -81,6 +100,30 @@ int main() {
 		cout << "]" << endl;
 	}
 	cout << "============================" << endl;
-	int *ad_list[]
+	cout << "Adjquency list" << endl;
+	node* ad_list[8]{};
+	while (true) {
+		int x, y;
+		cin >> x >> y;
+		if ((x < 0 or x >= n) && (y < 0 or y >= n))
+			continue;
+
+		create_node(ad_list[x], y);
+		create_node(ad_list[y], x);
+		char ch;
+		cout << "Is there any edge their: ";
+		cin >> ch;
+		if (ch == 'N' or ch == 'n')
+			break;
+	}
+	for (int i = 1; i < 5; i++) {
+		cout << i << " Edges ";
+		node* temp = ad_list[i];
+		while (temp) {
+			cout << temp->data << " ";
+			temp = temp->next;
+		}
+		cout << endl;
+	}
 	return 0;
 }
